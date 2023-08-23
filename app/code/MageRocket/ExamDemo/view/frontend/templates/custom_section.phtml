@@ -1,0 +1,17 @@
+Custom section here
+<div class="mr-custom-section" data-bind="scope: 'myproduct'" id="mycustomsection">
+	<p data-bind="text: customsection().customdata"></p>
+</div>
+<script type="text/x-magento-init">
+	{
+    	"*": {
+        	"Magento_Ui/js/core/app": {
+            	"components": {
+                	"myproduct": {
+                    	"component": "MageRocket_ExamDemo/js/section"
+                	}
+            	}
+        	}
+    	}
+	}
+</script>

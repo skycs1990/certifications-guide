@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © MageRocket, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:helloworld:Magento_Widget:etc/widget.xsd">
+	<widget class="MageRocket\ExamDemo\Block\Widget\Posts" id="magerocket_examdemo_posts">
+		<label>Mage Rocket Widget Demo</label>
+		<description>Posts</description>
+		<parameters>
+			<parameter name="posts" sort_order="10" visible="true" xsi:type="text">
+				<label>Custom Posts Label</label>
+			</parameter>
+			<parameter name="show_pager" xsi:type="select" visible="true"
+                       source_model="Magento\Config\Model\Config\Source\Yesno">
+                <label translate="true">Display Page Control</label>
+            </parameter>
+            <parameter name="products_per_page" xsi:type="text" required="true" visible="true">
+                <label translate="true">Number of Products per Page</label>
+                <depends>
+                    <parameter name="show_pager" value="1" />
+                </depends>
+                <value>5</value>
+            </parameter>
+		</parameters>
+	</widget>
+</widgets>

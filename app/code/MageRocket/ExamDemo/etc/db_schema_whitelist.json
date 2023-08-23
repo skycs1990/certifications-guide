@@ -1,0 +1,14 @@
+{
+    "magerocket_helloworld": {
+        "column": {
+            "id": true,
+            "author_name": true,
+            "email": true,
+            "description": true,
+            "pincode": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

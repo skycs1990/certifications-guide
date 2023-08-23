@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!--
+/** Grid di xml
+ * @category  MageRocket
+ * @package   MageRocket_ExamDemo
+ * @author    MageRocket
+ * @copyright  MageRocket 
+
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="MageRocket\ExamDemo\Api\Data\GridInterface" type="MageRocket\ExamDemo\Model\Grid" />
+
+    <virtualType name="MageRocket\ExamDemo\Model\ResourceModel\Grid\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">magerocket_grid_records</argument>
+            <argument name="resourceModel" xsi:type="string">MageRocket\ExamDemo\Model\ResourceModel\Grid</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="grid_record_grid_list_data_source" xsi:type="string">MageRocket\ExamDemo\Model\ResourceModel\Grid\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageRocket\ExamDemo\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="MageRocket\ExamDemo\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">customLogHandler</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">MageRocket\ExamDemo\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="MageRocket\ExamDemo\Api\CustomInterface" type="MageRocket\ExamDemo\Model\Api\Custom"/>
+    <type name="Magento\Framework\Console\CommandList">
+       <arguments>
+           <argument name="commands" xsi:type="array">
+               <item name="exampleSayHello" xsi:type="object">MageRocket\ExamDemo\Console\Hello</item>
+           </argument>
+       </arguments>
+   </type>
+
+    <!--<type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="magerocket_extension_attribute"
+                type="MageRocket\ExamDemo\Plugin\Checkout\Model\ShippingInformationManagement"
+                sortOrder="1" />
+    </type>-->
+
+     <type name="Magento\Sales\Api\OrderRepositoryInterface">       
+        <plugin name="save_magerocket_attribute" type="MageRocket\ExamDemo\Plugin\OrderSave"/>   
+        <plugin name="get_magerocket_attribute" type="MageRocket\ExamDemo\Plugin\OrderGet"/> 
+    </type> 
+
+      <type name="Magento\Checkout\Model\Cart">
+        <plugin name="CartPlugin" type="MageRocket\ExamDemo\Plugin\Cart" sortOrder="1" />
+    </type>
+ <type name="Magento\Catalog\Model\Product">
+        <plugin name="ProductPlugin" type="MageRocket\ExamDemo\Plugin\Product" sortOrder="1" />
+    </type>
+</config>

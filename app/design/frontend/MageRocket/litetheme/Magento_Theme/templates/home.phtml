@@ -1,0 +1,68 @@
+<?php
+		//banner
+		$objectManager = \Magento\Framework\App\ObjectManager::getInstance(); // Instance of object manager
+		$resource = $objectManager->get('Magento\Framework\App\ResourceConnection');
+		$connection = $resource->getConnection();
+		$tableName = $resource->getTableName('mageplaza_bannerslider_slider'); //gives table 
+ 		$sql = "Select * FROM " . $tableName;
+        $result = $connection->fetchAll($sql);
+
+	
+        //Get by category id
+        $collectionByCategory = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();;
+        $collectionByCategory->addAttributeToSelect('*');
+        $collectionByCategory->addCategoriesFilter(['in' => [3]]);
+        $stockFilter = $objectManager->get('\Magento\CatalogInventory\Helper\Stock');
+        $stockFilter->addInStockFilterToCollection($collectionByCategory);
+
+        //Rating
+        $collectionByRating = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+        $collectionByRating->addAttributeToSelect('*');
+		$todayDate  = date('Y-m-d', time());
+        $collectionByRating->addAttributeToFilter('news_from_date', array('date' => true, 'to' => $todayDate));
+        $collectionByRating->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        $stockFilter = $objectManager->get('\Magento\CatalogInventory\Helper\Stock');
+        $stockFilter->addInStockFilterToCollection($collectionByRating);
+
+        //Top Seller
+        $collectionByTopselling = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+        $collectionByTopselling->addAttributeToSelect('*');
+      	//$collectionByTopselling->addAttributeToFilter('topselling','1');
+      	$collectionByTopselling->addAttributeToFilter('new',1);
+      	
+        $collectionByTopselling->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        $stockFilter = $objectManager->get('\Magento\CatalogInventory\Helper\Stock');
+        $stockFilter->addInStockFilterToCollection($collectionByTopselling);
+
+        //Room Size
+        $collectionByRoomSize = $objectManager->get('\Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')->create();
+        $collectionByRoomSize->addAttributeToSelect('*');
+      	//$collectionByRoomSize->addAttributeToFilter('room_size',5446);
+      	$collectionByRoomSize->addAttributeToFilter('is_recommended',1);
+        $collectionByRoomSize->addAttributeToFilter('status',\Magento\Catalog\Model\Product\Attribute\Source\Status::STATUS_ENABLED);
+        $stockFilter = $objectManager->get('\Magento\CatalogInventory\Helper\Stock');
+        $stockFilter->addInStockFilterToCollection($collectionByRoomSize); 
+
+
+
+
+?>
+<script src="http://13.68.224.224/headless/pub/media/fs/jquery.min.js"/></script>
+<script>
+
+
+
+    jQuery(document).ready(function() {
+    	  jQuery(window).scroll(function(){
+    var aTop = jQuery('.breadcrumbs').height();
+    if(jQuery(this).scrollTop()>=aTop){
+        //alert('breadcrumbs just passed.');
+      
+    }
+  });
+
+    });
+
+
+</script>
+
