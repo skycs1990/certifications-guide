@@ -4,7 +4,7 @@ Custom section here
 </div>
 <script type="text/x-magento-init">
 	{
-    	"*": {
+    	"#mycustomsection": {
         	"Magento_Ui/js/core/app": {
             	"components": {
                 	"myproduct": {
@@ -15,3 +15,20 @@ Custom section here
     	}
 	}
 </script>
+
+<div id="custom-component" data-bind="scope:'customcomponent'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+    {
+        "#custom-component": {
+            "Magento_Ui/js/core/app": {
+               "components": {
+                    "customcomponent": {
+                        "component": "MageRocket_ExamDemo/js/custom-component"
+                    }
+                }
+            }
+        }
+    }
+    </script>
+</div>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <carriers>
+            <alcustomshipping>
+                <active>1</active>
+                <allowed_methods>delivery</allowed_methods>
+                <methods>delivery</methods>
+                <sallowspecific>0</sallowspecific>
+                <model>MageRocket\ExamDemo\Model\Carrier</model>
+                <name>Custom Shipping</name>
+                <title>Custom Shipping</title>
+                <handling_type>F</handling_type>
+            </alcustomshipping>
+        </carriers>
+         <payment>
+            <custompayment>
+                <payment_action>true</payment_action> <!-- You can use another method like authorize,capture etc.  -->
+                <model>MageRocket\ExamDemo\Model\PaymentMethod</model>
+                <active>1</active>
+                <title>MD Custom Payment</title>
+                <order_status>pending_payment</order_status> <!-- Set your default order status -->
+            </custompayment>
+        </payment>
+    </default>
+</config>
